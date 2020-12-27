@@ -1,0 +1,37 @@
+root = "/var/lib/containerd"
+state = "/var/run/containerd"
+plugin_dir = ""
+disabled_plugins = ["cri"]
+oom_score = -500
+
+[grpc]
+  address = "/var/run/containerd/containerd.sock"
+  tcp_address = "0.0.0.0:4342"
+  tcp_tls_cert = "/etc/containerd/containered.crt"
+  tcp_tls_key = "/etc/containerd/containered.pem"
+  uid = 0
+  gid = 0
+  max_recv_message_size = 16777216
+  max_send_message_size = 16777216
+
+[debug]
+  address = "/var/run/containerd/containerd-debug.sock"
+  uid = 0
+  gid = 0
+  level = "error"
+
+[metrics]
+  address = ""
+  grpc_histogram = false
+
+[cgroup]
+  path = ""
+
+[plugins]
+  [plugins.linux]
+    shim = "containerd-shim"
+    runtime = "runc"
+    runtime_root = "/var/run/runc"
+    no_shim = false
+    shim_debug = false
+
